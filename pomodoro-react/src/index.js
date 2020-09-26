@@ -1,13 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import AutheticationPage from "./features/auth/presentation/pages/AutheticationPage";
+
+import { Router, Route } from 'react-router';
+import { createBrowserHistory } from 'history'
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router history={createBrowserHistory()}>
+    <Route path='/' component={ AutheticationPage }/>
+  </Router>,
   document.getElementById('root')
 );
 
