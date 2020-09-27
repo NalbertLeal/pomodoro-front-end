@@ -2,10 +2,13 @@ import React from 'react'
 
 import './AutheticationPage.css'
 
-// import LoginBox from '../components/LoginBox'
+// core/presentation
+import Input from '../../../../core/presentation/components/Input'
+import Figure from '../../../../core/presentation/components/Figure'
+import Button from '../../../../core/presentation/components/Button'
 
 class AutheticationPage extends React.Component {
-  constructor(props) {
+  constructor() {
     super()
 
     this.state = {
@@ -25,51 +28,20 @@ class AutheticationPage extends React.Component {
 
   updatePassword(event) {
     this.setState({
-      email: event.target.value
+      password: event.target.value
     })
   }
 
   render() {
     return <section id="authentication-page">
-      <figure class="logo-figure">
-        <img 
-          src="https://doc.rust-lang.org/rust-logo1.46.0.png" 
-          alt="projet logo"
-        >
-        </img>
-        {/* <figcaption>Journaling with Tea</figcaption> */}
-      </figure>
-      
-      <label>
-        <p> Email: </p>
-        <input  
-          class="auth-input"
-          placeholder="email"
-          value={this.state.email} 
-          onChange={this.updateEmailInState}
-        />
-      </label>
+      <Figure src="https://doc.rust-lang.org/rust-logo1.46.0.png" alt="projet logo" />
 
-      <label>
-        <p> Password: </p>
-        <input  
-          class="auth-input"
-          placeholder="password"
-          value={this.state.password} 
-          onChange={this.updatePassword}
-        />
-      </label>
+      <Input label="Email" value={this.state.email} onChange={this.updateEmail} type="email" />
+      <Input label="Password" value={this.state.password} onChange={this.updatePassword} type="password" />
 
-      <button 
-        class="create-account-btn"
-      >
-        Create my account
-      </button>
-      <button 
-        class="forgot-password-btn"
-      >
-        Forgot my password
-      </button>
+      <Button label="Login" color="deep-red-200" />
+      <Button label="Create my account" color="deep-green-200" />
+      <Button label="Forgot my password" color="deep-blue-200" />
     </section>
   }
 }
