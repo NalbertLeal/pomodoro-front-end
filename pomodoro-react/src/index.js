@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import AutheticationPage from "./features/auth/presentation/pages/AutheticationPage";
 
-import { Router, Route } from 'react-router';
+import { Router, Route, Switch } from 'react-router';
 import { createBrowserHistory } from 'history'
 
 ReactDOM.render(
   <Router history={createBrowserHistory()}>
-    <Route path='/' component={ AutheticationPage }/>
+    <Switch>
+      <Route path='/' component={ AutheticationPage }/>
+    </Switch>
   </Router>,
   document.getElementById('root')
 );

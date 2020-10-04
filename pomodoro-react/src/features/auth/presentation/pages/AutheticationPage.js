@@ -1,11 +1,13 @@
 import React from 'react'
 
+import { Redirect } from 'react-router';
+
 import './AutheticationPage.css'
 
 // core/presentation
-import Input from '../../../../core/presentation/components/Input'
-import Figure from '../../../../core/presentation/components/Figure'
-import Button from '../../../../core/presentation/components/Button'
+import Input from '../../../../core/components/Input'
+import Figure from '../../../../core/components/Figure'
+import Button from '../../../../core/components/Button'
 
 class AutheticationPage extends React.Component {
   constructor() {
@@ -32,8 +34,14 @@ class AutheticationPage extends React.Component {
     })
   }
 
+  isAuthenticated() {
+    return <Redirect to="/timer" />
+  }
+
   render() {
     return <section id="authentication-page">
+      {this.isAuthenticated()}
+
       <Figure src="https://doc.rust-lang.org/rust-logo1.46.0.png" alt="projet logo" />
 
       <Input label="Email" value={this.state.email} onChange={this.updateEmail} type="email" />

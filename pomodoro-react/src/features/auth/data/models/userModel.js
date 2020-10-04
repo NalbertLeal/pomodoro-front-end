@@ -1,7 +1,7 @@
 import User from '../../domain/entities/user'
 
 class UserModel extends User {
-  constructor(email, password, id='',  name='', createdAt= new Date()) {
+  constructor(id, name, email, password, createdAt) {
     super(email, password, id, name, createdAt)
   }
 
@@ -11,7 +11,7 @@ class UserModel extends User {
   }
 
   toJson() {
-    return JSON.parse({
+    return JSON.stringify({
       'id': this.id,
       'name': this.name,
       'email': this.email,

@@ -39,7 +39,7 @@ app.post('/auth', (req, res) => {
   }
 
   if (!(email in accounts)) {
-    returnError(res, 'Authe error: the email isn\'t associated to any user.')
+    returnError(res, 'Auth error: the email isn\'t associated to any user.')
     return 
   }
 
@@ -58,16 +58,17 @@ app.post('/create-user', (req, res) => {
 
 
   if (!email || !password || !name) {
-    returnError(res, 'Create user error, email or password not found in request.')
+    returnError(res, 'Create user error, name, email or password not found in request.')
     return 
   }
 
   if (email in accounts) {
-    returnError(res, 'Authe error: the email is already associated to an user.')
+    returnError(res, 'Crete user error: the email is already associated to an user.')
     return 
   }
   
   accounts[email] = {
+    email: email,
     name: name,
     password: password
   }
