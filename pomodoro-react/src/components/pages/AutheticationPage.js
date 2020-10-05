@@ -1,13 +1,11 @@
 import React from 'react'
-
 import { Redirect } from 'react-router';
 
 import './AutheticationPage.css'
 
-// core/presentation
-import Input from '../../../../core/components/Input'
-import Figure from '../../../../core/components/Figure'
-import Button from '../../../../core/components/Button'
+import Input from '../basics/Input'
+import Figure from '../basics/Figure'
+import Button from '../basics/Button'
 
 class AutheticationPage extends React.Component {
   constructor() {
@@ -15,7 +13,8 @@ class AutheticationPage extends React.Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      timerRoute: '/timer'
     }
 
     this.updateEmail = this.updateEmail.bind(this)
@@ -35,7 +34,8 @@ class AutheticationPage extends React.Component {
   }
 
   isAuthenticated() {
-    return <Redirect to="/timer" />
+    const currentUser = localStorage.getItem('currentUser')
+    if (currentUser && currentUser.length > 0) return <Redirect to='/timer' />
   }
 
   render() {
@@ -47,9 +47,9 @@ class AutheticationPage extends React.Component {
       <Input label="Email" value={this.state.email} onChange={this.updateEmail} type="email" />
       <Input label="Password" value={this.state.password} onChange={this.updatePassword} type="password" />
 
-      <Button label="Login" color="deep-red-200" />
-      <Button label="Create my account" color="deep-green-200" />
-      <Button label="Forgot my password" color="deep-blue-200" />
+      <Button label="Login" />
+      <Button label="Create my account"/>
+      <Button label="Forgot my password" />
     </section>
   }
 }

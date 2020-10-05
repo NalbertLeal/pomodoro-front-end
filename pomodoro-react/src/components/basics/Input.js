@@ -12,10 +12,9 @@ class Input extends React.Component {
 
   render() {
     return <label>
-      <p> {this.props.label} </p>
       <input
         placeholder={this.props.label}
-        value={this.props.value} 
+        value={this.props.value}
         onChange={this.props.onChange}
         type={this.props.type}
       />

@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-import AutheticationPage from "./features/auth/presentation/pages/AutheticationPage";
+import AutheticationPage from "./components/pages/AutheticationPage";
+import TimerPage from "./components/pages/TimerPage";
 
 import { Router, Route, Switch } from 'react-router';
 import { createBrowserHistory } from 'history'
@@ -11,7 +12,8 @@ import { createBrowserHistory } from 'history'
 ReactDOM.render(
   <Router history={createBrowserHistory()}>
     <Switch>
-      <Route path='/' component={ AutheticationPage }/>
+      <Route path='/timer' component={TimerPage} />
+      <Route path='/' component={AutheticationPage} />
     </Switch>
   </Router>,
   document.getElementById('root')

@@ -9,7 +9,7 @@ class Figure extends React.Component {
   }
 
   render() {
-    return <figure class="logo-figure">
+    return <figure className="logo-figure">
       <img 
         src={this.props.src}
         alt={this.props.imgAlt}
