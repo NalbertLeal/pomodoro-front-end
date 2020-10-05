@@ -18,3 +18,7 @@ label input {
   box-shadow: 0rem 0rem .3rem .1rem grey;
   font-weight: bold;
 }
+
+.margin-4rem {
+  margin-bottom: 4rem;
+}

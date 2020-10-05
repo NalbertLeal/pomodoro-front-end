@@ -11,7 +11,7 @@ class Input extends React.Component {
   }
 
   render() {
-    return <label>
+    return <label className={this.props.classValue}>
       <input
         placeholder={this.props.label}
         value={this.props.value}
