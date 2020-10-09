@@ -31,13 +31,30 @@
 </script>
 
 <style>
-  #authentication-page {
-    min-width: 100vw;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  @media only screen and (max-width: 721px) {
+    #authentication-page {
+      min-width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0rem;
+      padding: 1rem 0rem 0rem 0rem;
+    }
+  }
+
+  @media only screen and (min-width: 722px) {
+    #authentication-page {
+      min-width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0rem;
+      padding: 0rem;
+    }
   }
 </style>
 
