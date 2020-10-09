@@ -17,18 +17,18 @@
       <p className="tasksdone-">Done tasks: {doneTasks}</p>
     </div>
 
-    <Input label="New Task text" :onChange="updateTaskText" type="text" />
+    <app-input label="New Task text" :onChange="updateTaskText" type="text" />
 
-    <Button label="Create new task" :onClick="() => {}" />
+    <app-button label="Create new task" :onClick="() => {}" />
   </section>
 </template>
 
 <script>
   import { mapGetters, mapMutations } from 'vuex'
 
-  import Button from '../basics/Button.svelte'
-  import Figure from '../basics/Figure.svelte'
-  import Input from '../basics/Input.svelte'
+  import Button from '../components/Button.vue'
+  // import Figure from '../basics/Figure.svelte'
+  import Input from '../components/Input.vue'
 
   export default {
     name: 'Timer',

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Authentication from '../views/Authentication'
+import Timer from '../views/Timer'
 import CreateNewUser from '../views/CreateNewUser'
 import RecoverUserPassword from '../views/RecoverUserPassword'
 import Error404 from '../views/Error404'
@@ -15,12 +16,17 @@ const routes = [
     component: Authentication
   },
   {
-    path: '/',
+    path: '/timer',
+    name: 'Timer',
+    component: Timer
+  },
+  {
+    path: '/create-new-user',
     name: 'CreateNewUser',
     component: CreateNewUser
   },
   {
-    path: '/',
+    path: '/recover-user-password',
     name: 'RecoverUserPassword',
     component: RecoverUserPassword
   },

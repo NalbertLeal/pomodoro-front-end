@@ -6,22 +6,21 @@
     <app-input label="Password" onChange={updatePassword} type="password" /> 
     <!-- classValue="margin-4rem"/> -->
 
-    <app-button label="Login" :onClick="() => { $router. }"/>
-    <app-button label="Create my account" :onClick="() => { page('/new-user') }"/>
-    <app-button label="Forgot my password" :onClick="() => { page('/recover-password') }" />
+    <app-button label="Login" :onClick="goToTimer"/>
+    <app-button label="Create my account" :onClick="goToCreateNewUser"/>
+    <app-button label="Forgot my password" :onClick="goToRecoverUserPassword" />
   </section>
 </template>
 
 <script>
-  import Button from '../basics/Button.svelte'
-  import Figure from '../basics/Figure.svelte'
-  import Input from '../basics/Input.svelte'
+  import Button from '../components/Button.vue'
+  // import Figure from '../basics/Figure.svelte'
+  import Input from '../components/Input.vue'
 
   export default {
     name: 'Authetication',
     components: {
       'app-button': Button,
-      'app-figure': Figure,
       'app-input': Input
     },
     methods: {

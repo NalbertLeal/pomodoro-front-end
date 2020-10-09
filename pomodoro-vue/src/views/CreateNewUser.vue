@@ -1,16 +1,17 @@
 <template>
   <section id="create-new-user-page">
-    <Input label="Email" :onChange="updateEmail" type="email" />
-    <Input label="Password" :onChange="updatePassword" type="password" />
-    <Input label="Repeat password" :onChange="updateRepeatPassword" type="password" />
+    <app-input label="Email" :onChange="updateEmail" type="email" />
+    <app-input label="Password" :onChange="updatePassword" type="password" />
+    <app-input label="Repeat password" :onChange="updateRepeatPassword" type="password" />
 
-    <Button label="Create new user" />
+    <app-button label="Create new user" />
   </section>
 </template>
 
 <script>
-  import Button from '../basics/Button.svelte'
-  import Input from '../basics/Input.svelte'
+  import Button from '../components/Button.vue'
+  // import Figure from '../basics/Figure.svelte'
+  import Input from '../components/Input.vue'
 
   export default {
     name: 'CreateNewUser',

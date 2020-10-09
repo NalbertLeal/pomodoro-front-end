@@ -1,15 +1,16 @@
 <template>
   <section id="recover-password">
     <div class="email-box">
-      <Input label="Email" onChange={updateEmail} type="email" />
-      <Button label="Send email" onClick={() => {}} />
+      <app-input label="Email" :onChange="updateEmail" type="email" />
+      <app-button label="Send email" :onClick="() => {}" />
     </div>
   </section>
 </template>
 
 <script>
-  import Button from '../basics/Button.svelte'
-  import Input from '../basics/Input.svelte'
+  import Button from '../components/Button.vue'
+  // import Figure from '../basics/Figure.svelte'
+  import Input from '../components/Input.vue'
 
   export default {
     name: 'RecoverUserPassword',
