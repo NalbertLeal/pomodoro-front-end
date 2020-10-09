@@ -10,8 +10,8 @@
   let currentPage
 
   page('/timer', () => (currentPage = TimerPage))
-  page('/newUser', () => (currentPage = CreateNewUserPage))
-  page('/recoverPassword', () => (currentPage = RecoverPasswordPage))
+  page('/new-user', () => (currentPage = CreateNewUserPage))
+  page('/recover-password', () => (currentPage = RecoverPasswordPage))
   page(baseURL, () => (currentPage = AuthenticationPage))
 
   page.start()

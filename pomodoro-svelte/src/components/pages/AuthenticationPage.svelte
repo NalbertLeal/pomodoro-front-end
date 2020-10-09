@@ -49,6 +49,6 @@
   <!-- classValue="margin-4rem"/> -->
 
   <Button label="Login" onClick={() => { page('/timer') }}/>
-  <Button label="Create my account" onClick={() => { page('/newUser') }}/>
-  <Button label="Forgot my password" onClick={() => { page('/recoverPassword') }} />
+  <Button label="Create my account" onClick={() => { page('/new-user') }}/>
+  <Button label="Forgot my password" onClick={() => { page('/recover-password') }} />
 </section>
