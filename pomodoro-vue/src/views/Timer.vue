@@ -1,20 +1,10 @@
 <template>
   <section id="timer-page">
-    <p>{parseTick()}</p>
+    <app-timer />
 
-    <div className="pomodoro-stages">
-      <div id="pomodoro-short-rest" class="pomodoro-stage" :class="{'pomodoro-stage-active': shortRestDiv}">Short Rest</div>
-      <div id="pomodoro-long-rest" class="pomodoro-stage" :class="{'pomodoro-stage-active': longRestDiv}" >Long Rest</div>
-      <div id="pomodoro-work-time" class="pomodoro-stage" :class="{'pomodoro-stage-active': workTimeDiv}" >Work Time</div>
-    </div>
-
-    <div id="time-bar">
-
-    </div>
-
-    <div className="tasks-indicator">
-      <p className="total-tasks">Total tasks: {toDoTasks.length}</p>
-      <p className="tasksdone-">Done tasks: {doneTasks}</p>
+    <div class="tasks-indicator">
+      <p class="total-tasks">Total tasks: {{toDoTasks.length}}</p>
+      <p class="tasksdone-">Done tasks: {{doneTasks}}</p>
     </div>
 
     <app-input label="New Task text" :onChange="updateTaskText" type="text" />
@@ -24,28 +14,24 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex'
+  import { mapState } from 'vuex'
 
   import Button from '../components/Button.vue'
   // import Figure from '../basics/Figure.svelte'
   import Input from '../components/Input.vue'
+  import Timer from '../components/Timer.vue'
 
   export default {
     name: 'Timer',
     components: {
       'app-button': Button,
-      'app-input': Input
+      'app-input': Input,
+      'app-timer': Timer
     },
     computed: {
-      ...mapGetters([
-        'parseTick'
-      ])
-    },
-    methods: {
-      ...mapMutations([
-        'startTimer',
-        'stopTimer',
-        'tick'
+      ...mapState([
+        'toDoTasks',
+        'doneTasks'
       ])
     }
   }
@@ -59,30 +45,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .pomodoro-stages {
-    width: 100vw;
-    height: 7rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .pomodoro-stages .pomodoro-stage {
-    width: 7rem;
-    height: 5rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: lightpink;
-    font-weight: bold;
-  }
-
-  .pomodoro-stages .pomodoro-stage-active {
-    background-color: tomato !important;
-    color: white;
   }
 
   .tasks-indicator {

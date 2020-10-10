@@ -3,7 +3,7 @@
     <input
       :type="type"
       :placeholder="label"
-      :onchange="onChange()"
+      :onchange="onClick()"
     />
   </label>
 </template>
