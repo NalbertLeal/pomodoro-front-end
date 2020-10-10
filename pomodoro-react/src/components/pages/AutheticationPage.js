@@ -2,7 +2,7 @@ import React from 'react'
 import { Redirect } from 'react-router';
 
 import './AutheticationPage.css'
-import store from "../../store/store.js";
+// import store from "../../store/store.js";
 
 import Input from '../basics/Input'
 import Figure from '../basics/Figure'

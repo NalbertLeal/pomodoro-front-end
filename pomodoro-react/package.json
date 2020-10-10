@@ -15,7 +15,8 @@
     "redux": "^4.0.5"
   },
   "scripts": {
-    "start": "sudo sysctl fs.inotify.max_user_watches=524288 && sudo sysctl -p && react-scripts start",
+    "start": "react-scripts start",
+    "start-linux": "sudo sysctl fs.inotify.max_user_watches=524288 && sudo sysctl -p && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

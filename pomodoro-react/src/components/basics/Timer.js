@@ -1,11 +1,6 @@
 import React from 'react'
-import { Redirect } from 'react-router';
 
-import './TimerPage.css'
-
-import Input from '../basics/Input'
-import Button from '../basics/Button'
-import Timer from '../basics/Timer'
+import './Timer.css'
 
 class TimerPage extends React.Component {
   constructor(props) {
@@ -15,15 +10,11 @@ class TimerPage extends React.Component {
       initialTimer: null,
       currentTimer: null,
       taskText: '',
-      toDoTasks: [],
-      doneTasks: 0,
       pomodoroCurrentStage: 0,
       shortRestDiv: '',
       longRestDiv: '',
       workTimeDiv: 'pomodoro-stage-active'
     }
-
-    this.updateTaskText = this.updateTaskText.bind(this)
   }
 
   componentDidMount() {
@@ -107,41 +98,20 @@ class TimerPage extends React.Component {
     return `${minutes} : ${seconds < 0 ? 0 : seconds}`
   }
 
-  updateTaskText(event) {
-    this.setState({
-      taskText: event.target.value
-    })
-  }
-
-  redirectToProfile() {
-    return <Redirect to={this.state.timerRoute} />
-  }
-
-  isAuthenticated() {
-    const currentUser = localStorage.getItem('currentUser')
-    if (currentUser && currentUser.length > 0) return true
-    return false
-  }
-
-  ifNotAuthenticatedGoToLogin() {
-    if (!this.isAuthenticated()) return <Redirect to='/' />
-  }
-
   render() {
-    return <section id="timer-page">
+    return <div id="timer">
       {/* {this.ifNotAuthenticatedGoToLogin()} */}
 
-      <Timer />
+      <p>{this.parseTick()}</p>
 
-      <div className="tasks-indicator">
-        <p className="total-tasks">Total tasks: {this.state.toDoTasks.length}</p>
-        <p className="tasksdone-">Done tasks: {this.state.doneTasks}</p>
+      <div className="pomodoro-stages">
+        <div id="pomodoro-short-rest" className={`pomodoro-stage ${this.state.shortRestDiv}`}>Short Rest</div>
+        <div id="pomodoro-long-rest" className={`pomodoro-stage ${this.state.longRestDiv}`}>Long Rest</div>
+        <div id="pomodoro-work-time" className={`pomodoro-stage ${this.state.workTimeDiv}`}>Work Time</div>
       </div>
 
-      <Input label="New Task text" value={this.state.taskText} onChange={this.updateTaskText} type="text" />
-
-      <Button label="Create new task" />
-    </section>
+      <div id="time-bar" />
+    </div>
   }
 }
 
