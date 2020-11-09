@@ -3,8 +3,8 @@
     <app-timer />
 
     <div class="tasks-indicator">
-      <p class="total-tasks">Total tasks: {{toDoTasks.length}}</p>
-      <p class="tasksdone-">Done tasks: {{doneTasks}}</p>
+      <p class="total-tasks">Total tasks: {{state.toDoTasks.length}}</p>
+      <p class="tasksdone-">Done tasks: {{state.doneTasks}}</p>
     </div>
 
     <app-input label="New Task text" :onChange="updateTaskText" type="text" />
@@ -13,27 +13,25 @@
   </section>
 </template>
 
-<script>
-  import { mapState } from 'vuex'
+<script lang="ts">
+  import Vue from 'vue';
+  import { State } from 'vuex-class';
+  import Component from 'vue-class-component';
 
   import Button from '../components/Button.vue'
   // import Figure from '../basics/Figure.svelte'
   import Input from '../components/Input.vue'
   import Timer from '../components/Timer.vue'
 
-  export default {
-    name: 'Timer',
+  @Component({
     components: {
-      'app-button': Button,
-      'app-input': Input,
-      'app-timer': Timer
-    },
-    computed: {
-      ...mapState([
-        'toDoTasks',
-        'doneTasks'
-      ])
+      Button,
+      Input,
+      Timer
     }
+  })
+  export default class TimerComponent extends Vue {
+    @State('timer') state;
   }
 </script>
 
