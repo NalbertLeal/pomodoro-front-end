@@ -1,6 +1,6 @@
 <template>
   <section id="authentication-page">
-    <!-- <app-figure src="https://doc.rust-lang.org/rust-logo1.46.0.png" alt="projet logo" /> -->
+    <app-figure :src="logo" alt="projet logo" />
 
     <app-input label="Email" onChange={updateEmail} type="email" />
     <app-input label="Password" onChange={updatePassword} type="password" /> 
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  import logo from "@/assets/logo.png"
   import Button from '../components/Button.vue'
   // import Figure from '../basics/Figure.svelte'
   import Input from '../components/Input.vue'
@@ -22,6 +23,11 @@
     components: {
       'app-button': Button,
       'app-input': Input
+    },
+    data() {
+      return {
+        logo: logo
+      }
     },
     methods: {
       goToTimer() {

@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Authentication from '../views/Authentication'
-import Timer from '../views/Timer'
-import CreateNewUser from '../views/CreateNewUser'
-import RecoverUserPassword from '../views/RecoverUserPassword'
-import Error404 from '../views/Error404'
+import Authentication from '@/views/Authentication.vue'
+import Timer from '../views/Timer.vue'
+import CreateNewUser from '../views/CreateNewUser.vue'
+import RecoverUserPassword from '../views/RecoverUserPassword.vue'
+import Error404 from '../views/Error404.vue'
 
 Vue.use(VueRouter)
 

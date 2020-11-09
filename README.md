@@ -36,3 +36,7 @@ Infelizmente a implementação angular está atrasada por ser diferente das dema
 
 Contribuidor/responsável: Nalbert Gabriel Melo Leal
 Avaliador: Dr. André Mauricio
+
+# Referencias:
+
+imagem usada na logo: [logo](https://www.pngwing.com/pt/free-png-xqail)
