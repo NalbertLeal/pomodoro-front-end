@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import * as serviceWorker from './serviceWorker';
 
-import { Router, Route, Switch } from 'react-router';
-import { createBrowserHistory } from 'history'
+import './index.css';
+import './matter.min.css'
+import * as serviceWorker from './serviceWorker'
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+// import { createBrowserHistory } from 'history'
 import { Provider } from 'react-redux'
 
-import AutheticationPage from "./components/pages/AutheticationPage";
-import CreateNewUserPage from "./components/pages/CreateNewUserPage";
-import TimerPage from "./components/pages/TimerPage";
+import HomeWrapper from './presentation/pages/HomeWrapper'
+import RegisterNewUserPage from "./presentation/pages/RegisterNewUserPage"
+import PomodoroPage from "./presentation/pages/PomodoroPage"
 
 import store from './store/store'
 
@@ -17,13 +19,13 @@ const ContextA = React.createContext();
 
 ReactDOM.render(
   <Provider store={store} context={ContextA}>
-    <Router history={createBrowserHistory()}>
-      <Switch>
-        <Route path='/timer' component={TimerPage} />
-        <Route path='/create-new-user' component={CreateNewUserPage} />
-        <Route path='/' component={AutheticationPage} />
-      </Switch>
-    </Router>
+    <BrowserRouter>
+        <Switch>
+            <Route path='/pomodoro' component={PomodoroPage} />
+            <Route path='/register-new-user' component={RegisterNewUserPage} />
+            <Route path='/' component={HomeWrapper} />
+        </Switch>
+    </ BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );

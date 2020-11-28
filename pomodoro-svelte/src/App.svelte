@@ -1,18 +1,18 @@
 <script>
   import page from "page"
 
-  import AuthenticationPage from "./components/pages/AuthenticationPage.svelte"
-  import TimerPage from "./components/pages/TimerPage.svelte"
-  import CreateNewUserPage from "./components/pages/CreateNewUserPage.svelte"
-  import RecoverPasswordPage from "./components/pages/RecoverUserPasswordPage.svelte"
+  import Login from "./presentation/pages/Login.svelte"
+  import Pomodoro from "./presentation/pages/Pomodoro.svelte"
+  import HomeWrapper from "./presentation/pages/HomeWrapper.svelte"
+  import CreateNewUser from "./presentation/pages/CreateNewUser.svelte"
 
   let baseURL = '/'
   let currentPage
 
-  page('/timer', () => (currentPage = TimerPage))
-  page('/new-user', () => (currentPage = CreateNewUserPage))
-  page('/recover-password', () => (currentPage = RecoverPasswordPage))
-  page(baseURL, () => (currentPage = AuthenticationPage))
+  page('/pomodoro', () => (currentPage = Pomodoro))
+  page('/login', () => (currentPage = Login))
+  page('/register-new-user', () => (currentPage = CreateNewUser))
+  page(baseURL, () => (currentPage = HomeWrapper))
 
   page.start()
 </script>

@@ -1,0 +1,45 @@
+#login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+button {
+  margin: 0rem 0rem 1rem 0rem;
+}
+
+p {
+  margin: 0rem 0rem 1rem 0rem;
+}
+
+#register-link {
+  font-size: large;
+}
+
+#login {
+  width: 18rem;
+  /* height: 15rem; */
+  box-shadow: 0rem 0rem 0.7rem #aac;
+}
+
+#login,
+#login form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#login article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+#login .or {
+  text-align: center;
+}
