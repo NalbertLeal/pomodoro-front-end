@@ -1,0 +1,1 @@
+class WrongPassword extends Error {}
