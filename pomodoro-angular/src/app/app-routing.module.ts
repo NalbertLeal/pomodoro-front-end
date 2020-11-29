@@ -6,8 +6,8 @@ import { RegisterNewUserComponent } from './register-new-user/register-new-user.
 import { PomodoroComponent } from './pomodoro/pomodoro.component';
   
 const routes: Routes = [
-  {path : 'login', component : LoginComponent}
-  {path : 'register-new-user', component : RegisterNewUserComponent}
+  {path : 'login', component : LoginComponent},
+  {path : 'register-new-user', component : RegisterNewUserComponent},
   {path : 'pomodoro', component : PomodoroComponent}
 ];
   
