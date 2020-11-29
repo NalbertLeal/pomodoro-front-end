@@ -1,18 +1,17 @@
 import UserRepository from '../../data/repositories/UserRepository'
-import TokenRepository from '../../data/repositories/TokenRepository'
 
-class Login {
+class Logout {
   constructor() {
     this.userRepository = new UserRepository()
   }
   
-  execute(email, password) {
+  execute() {
     try {
-      return await this.userRepository.login(email, password)
+      await this.userRepository.logout()
     } catch(e) {
       throw e
     }
   }
 }
 
-export default Login
+export default Logout

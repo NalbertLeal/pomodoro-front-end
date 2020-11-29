@@ -12,95 +12,195 @@ app.use(bodyParser())
 app.use(methodOverride())
 app.use(cors())
 
-const tokens = {}
-const accounts = {}
-const lists = {}
+let db = {}
+let tokens = {}
 
-function generateAndStoreToken(email) {
-  const newToken = uuid()
-  tokens[newToken] = email
-  return newToken
-}
-
-function returnError(res, msg) {
-  res.status(200)
-  .json({
-    error: msg
-  })
-}
-
-app.post('/auth', (req, res) => {
-  const email = req.body.email
-  const password = req.body.password
-
-  if (!email || !password) {
-    returnError(res, 'Auth error, email or password not found in request.')
-    return 
+function isTokenValid(token, res) {
+  let ok = tokens[token] || false
+  if (!ok) {
+    res
+    .status(400)
+    .json({
+      'error': 'invalid token'
+    })
+    return false
   }
+  return true
+} 
 
-  if (!(email in accounts)) {
-    returnError(res, 'Auth error: the email isn\'t associated to any user.')
-    return 
-  }
+app.post('/login', (req, res) => {
+  try {
+    let email = req.body.email || ''
+    let password = req.body.password || ''
 
-  if (accounts[email].password === password) {
-    res.status(200)
+    let user = db[email]
+    if (!user || user.password != password) {
+      res
+        .status(404)
+        .json({
+          'error': 'user not found'
+        })
+    }
+
+    let token = uuid()
+    tokens[token] = email
+
+    res
+      .status(200)
       .json({
-        token: generateAndStoreToken(email)
+        'token': token,
+        'name': db[email]['name']
       })
+  } catch(e) {
+    res
+    .status(400)
+    .json({
+      'error': e
+    })
   }
 })
 
-app.post('/create-user', (req, res) => {
-  const email = req.body.email
-  const password = req.body.password
-  const name = req.body.name
+app.post('/logout', (req, res) => {
+  try {
+    let token = req.body.token || ''
 
+    if (!isTokenValid(token, res)) {
+      return
+    }
 
-  if (!email || !password || !name) {
-    returnError(res, 'Create user error, name, email or password not found in request.')
-    return 
-  }
+    delete tokens[token]
 
-  if (email in accounts) {
-    returnError(res, 'Crete user error: the email is already associated to an user.')
-    return 
-  }
-  
-  accounts[email] = {
-    email: email,
-    name: name,
-    password: password
-  }
-  
-  return res
-    .status(200)
+    res.status(200)
+  } catch(e) {
+    res
+    .status(400)
     .json({
-      token: generateAndStoreToken(email)
+      'error': e
     })
+  }
 })
 
-app.get('/user', (req, res) => {
-  const token = req.query.token
-  if (!token) {
-    returnError(res, 'Token error: The token must be provided into the request body.')
-    return
-  }
-  
-  if (!(token in tokens)) {
-    returnError(res, 'Token error: The token isn\'t valid.')
-    return
-  }
+app.post('/register', (req, res) => {
+  try {
+    let name = req.body.name || ''
+    let email = req.body.email || ''
+    let password = req.body.password || ''
 
-  const email = tokens[token]
-  const user = accounts[email]
-  user.password = ''
+    let user = db[email] || false
+    if (user) {
+      res
+        .status(400)
+        .json({
+          'error': 'user alread exists'
+        })
+    }
 
-  res
-    .status(200)
+    db[email] = {
+      'name': name,
+      'email': email,
+      'password': password
+    }
+
+    let token = uuid()
+    tokens[token] = email
+
+    res
+      .status(200)
+      .json({
+        'token': token
+      })
+  } catch(e) {
+    res
+    .status(400)
     .json({
-      user: user
+      'error': e
     })
+  }
+})
+
+app.get('/task', (req, res) => {
+  try {
+    let token = req.query.token || ''
+
+    if (!isTokenValid(token, res)) {
+      return
+    }
+
+    let email = tokens[token]
+
+    res
+      .status(200)
+      .json({
+        'tasks': db[email]['tasks']
+      })
+  } catch(e) {
+    res
+    .status(400)
+    .json({
+      'error': e
+    })
+  }
+})
+
+app.post('/task', (req, res) => {
+  try {
+    let token = req.body.token || ''
+
+    if (!isTokenValid(token, res)) {
+      return
+    }
+
+    let email = tokens[token]
+    let taskTitle = req.body.title
+    let taskDescription = req.body.description
+
+    const id = uuid()
+    db[email]['tasks']
+      .push({
+        'id': id,
+        'title': taskTitle,
+        'description': taskDescription
+      })
+
+    res
+      .status(200)
+      .json({
+        'id': id
+      })
+  } catch(e) {
+    res
+    .status(400)
+    .json({
+      'error': e
+    })
+  }
+})
+
+app.delete('/task', (req, res) => {
+  try {
+    let token = req.query.token || ''
+
+    if (!isTokenValid(token, res)) {
+      return
+    }
+
+    let taskId = parseInt(req.query.id) || -1
+    
+    let email = tokens[token]
+    db[email]['tasks'] = db[email]['tasks'].filter(e => {
+      if (e.id != taskId) {
+        return e
+      }
+    })
+
+    res.status(200)
+  } catch(e) {
+    res
+    .status(400)
+    .json({
+      'error': e
+    })
+  }
 })
 
 app.get('/', (req, res) => {
