@@ -10,3 +10,5 @@ class Tasks {
       this.descrition.isValid
   }
 }
+
+export default Tasks
