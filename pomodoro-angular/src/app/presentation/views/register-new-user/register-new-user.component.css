@@ -1,0 +1,45 @@
+#register-new-user-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+button {
+  margin: 0rem 0rem 1rem 0rem;
+}
+
+input {
+  margin-bottom: 1rem;
+}
+
+p {
+  margin: 0rem 0rem 1rem 0rem;
+}
+
+#register {
+  width: 18rem;
+  height: 20rem;
+  box-shadow: 0rem 0rem 0.7rem #aac;
+}
+
+#register,
+#register form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#register article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+#accept-terms-checkbox {
+  margin-bottom: 1rem;
+}
