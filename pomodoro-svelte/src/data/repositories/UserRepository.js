@@ -6,25 +6,43 @@ class UserRepository {
     this.userDataSource = new UserDataSource()
   }
 
-  getUser(email, password) {
+  async login(email, password) {
     try {
-      const user = this.userDataSource.getUser(email, password)
+      const res = await this.userDataSource.getUser(email, password)
+
+      localStorage.setItem('token', res.token)
+
       return new User(
-        user.email, 
-        user.password
+        res.name, 
+        email, 
+        password
       )
     } catch (e) {
       throw e
     }
   }
 
-  createUser(user) {
+  async createUser(user) {
     try {
-      this.userDataSource.getUser(user)
+      const res = await this.userDataSource.getUser(user)
+
+      localStorage.setItem('token', res.token)
+
+      return true
     } catch (e) {
       throw e
     }
   }
+
+  async logout() {
+    try {
+      const token = localStorage.getItem('token') 
+      await this.userDataSource.logout(token)
+      localStorage.removeItem('token')
+    } catch (e) {
+      throw e
+    }
+  } 
 }
 
 export default UserRepository

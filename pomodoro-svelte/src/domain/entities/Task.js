@@ -1,4 +1,4 @@
-class Tasks {
+class Task {
   constructor(title, descrition, id=-1) {
     this.id = id
     this.title = new StringField(title)
@@ -10,3 +10,5 @@ class Tasks {
       this.descrition.isValid
   }
 }
+
+export default Task

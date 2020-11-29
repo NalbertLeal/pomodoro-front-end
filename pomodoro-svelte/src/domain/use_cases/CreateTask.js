@@ -5,9 +5,9 @@ class CreateTask {
     this.taskRepository = new TaskRepository()
   }
 
-  async execute(user, task) {
+  async execute(task) {
     try {
-      await this.taskRepository.createTask(user, task)
+      task.id = await this.taskRepository.createTask(task)
     } catch (e) {
       throw e
     }

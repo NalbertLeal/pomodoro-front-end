@@ -4,14 +4,11 @@ import TokenRepository from '../../data/repositories/TokenRepository'
 class Login {
   constructor() {
     this.userRepository = new UserRepository()
-    this.tokenRepository = new TokenRepository()
   }
   
-  execute(login, password) {
+  execute(email, password) {
     try {
-      const user = this.userRepository.getUser(login, password)
-      const token = this.tokenRepository.getToken(user)
-      return token
+      return await this.userRepository.login(email, password)
     } catch(e) {
       throw e
     }

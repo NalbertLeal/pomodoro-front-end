@@ -7,7 +7,7 @@ class DeleteTask {
 
   async execute(task) {
     try {
-      this.taskRepository.deleteTask(task)
+      await this.taskRepository.deleteTask(task)
     } catch (e) {
       throw e
     }

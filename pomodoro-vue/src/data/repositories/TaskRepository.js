@@ -5,24 +5,26 @@ class TaskRepository {
     this.taskDataSource = new TaskDataSource()
   }
   
-  async getAllUserTasks(user) {
+  async getAllUserTasks() {
     try {
-      const tasksJSONList = await this.taskDataSource.getAllUserTasks(user)
-      const tasksList = tasksJSONList.map(t => {
+      const token = localStorage.getItem('token')
+      const tasks = await this.taskDataSource.getAllUserTasks(token)
+      
+      return tasks.map(t => {
         return new Task(
           e.title,
           e.description
         )
       })
-      return tasksList
     } catch (e) {
       throw e
     }
   }
 
-  async createTask(user, task) { 
+  async createTask(task) { 
     try {
-      await this.taskDataSource.createTask(user, task)
+      const token = localStorage.getItem('token')
+      return await this.taskDataSource.createTask(token, task)
     } catch (e) {
       throw e
     }
@@ -30,7 +32,8 @@ class TaskRepository {
 
   async deleteTask(task) {
     try {
-      await this.taskDataSource.deleteTask(task)
+      const token = localStorage.getItem('token')
+      await this.taskDataSource.deleteTask(token, task)
     } catch (e) {
       throw e
     }

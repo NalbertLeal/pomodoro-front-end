@@ -1,6 +1,6 @@
 class Name {
   constructor(name) {
-    if (typeof(name) !== 'String') {
+    if (typeof(name) !== 'string') {
       this.name = ''
     } else {
         this.name = name
@@ -8,11 +8,13 @@ class Name {
   }
 
   get isValid() {
-    let passwordRegExp = new RegExp('[a-zA-Z ]+')
-    let regexMatch = passwordRegExp?.match(password) ?? []
+    let nameRegExp = new RegExp('[a-zA-Z ]+')
+    let regexMatch = this.name?.match(nameRegExp) ?? []
 
-    return name.length < 60 && 
-      password.length > 6 && 
+    return this.name.length < 60 && 
+      this.name.length > 6 && 
       regexMatch.length == 1
   }
 }
+
+export default Name

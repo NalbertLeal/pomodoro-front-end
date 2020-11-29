@@ -13,3 +13,5 @@ class Token {
       (typeof this.createdAt) === 'object'
   }
 }
+
+export default Token

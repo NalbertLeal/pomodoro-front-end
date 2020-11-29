@@ -5,7 +5,7 @@ class StringField {
 
   get isValid() {
     return this.str !== undefined &&
-      (typeof this.str) === 'String'
+      (typeof this.str) === 'string'
   }
 }
 
