@@ -2,15 +2,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { TimerComponent } from './timer/timer.component';
+import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './login/login.component';
+import { RegisterNewUserComponent } from './register-new-user/register-new-user.component';
+import { PomodoroComponent } from './pomodoro/pomodoro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TimerComponent
+    LoginComponent,
+    RegisterNewUserComponent,
+    PomodoroComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

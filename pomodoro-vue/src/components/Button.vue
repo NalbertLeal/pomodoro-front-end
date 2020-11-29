@@ -1,37 +1,23 @@
 <template>
-  <button
-    @click="onClick()"
-  >
-    {{label}}
-  </button>
+  <button id="login-btn" class="matter-button-contained" v-on:click="onClick">{{label}}</button>
 </template>
 
-<script>
-  export default {
-    name: 'Button',
+<script lang="ts">
+  import Vue from 'vue';
+  import Component from 'vue-class-component';
+
+  const Props = Vue.extend({
     props: {
-      label: {
-        type: String,
-        default: ''
-      },
-      onClick: {
-        type: Function,
-        default: () => { return () =>{} }
-      }
+      label: String,
+      onClick: Function
     }
+  })
+
+  @Component
+  export default class Button extends Props {
+    
   }
 </script>
 
 <style scoped>
-  button {
-    width: 12rem;
-    height: 3rem;
-    margin-bottom: 1rem;
-    border: none;
-    border-radius: 3rem;
-    outline: none;
-    color: #000;
-    background-color: transparent;
-    box-shadow: 0rem 0rem .3rem .1rem grey;
-  }
 </style>

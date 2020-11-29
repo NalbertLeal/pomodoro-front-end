@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Authentication from '@/views/Authentication.vue'
-import Timer from '../views/Timer.vue'
-import CreateNewUser from '../views/CreateNewUser.vue'
-import RecoverUserPassword from '../views/RecoverUserPassword.vue'
+import HomeWrapper from '@/views/HomeWrapper.vue'
+import Pomodoro from '../views/Pomodoro.vue'
+import Login from '../views/Login.vue'
+import RegisterNewUser from '../views/RegisterNewUser.vue'
 import Error404 from '../views/Error404.vue'
 
 Vue.use(VueRouter)
@@ -12,23 +12,23 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Authentication',
-    component: Authentication
+    name: 'HomeWrapper',
+    component: HomeWrapper
   },
   {
-    path: '/timer',
-    name: 'Timer',
-    component: Timer
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
-    path: '/create-new-user',
-    name: 'CreateNewUser',
-    component: CreateNewUser
+    path: '/pomodoro',
+    name: 'Pomodoro',
+    component: Pomodoro
   },
   {
-    path: '/recover-user-password',
-    name: 'RecoverUserPassword',
-    component: RecoverUserPassword
+    path: '/register-new-user',
+    name: 'RegisterNewUser',
+    component: RegisterNewUser
   },
   {
     path: '*',
