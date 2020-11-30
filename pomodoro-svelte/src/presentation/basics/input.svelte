@@ -1,6 +1,6 @@
 <script>
   export let label
-  export let getValue = () => value
+  // export let getValue = () => value
 
   let value = undefined
 </script>
@@ -12,6 +12,6 @@
 </style>
 
 <label id="normal" class="matter-textfield-standard">
-  <input placeholder=" " on:change={value}/>
+  <input placeholder=" " on:change/>
   <span>{label}</span>
 </label>

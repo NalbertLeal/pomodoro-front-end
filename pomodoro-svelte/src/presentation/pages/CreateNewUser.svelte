@@ -1,16 +1,48 @@
 <script>
   import page from "page"
 
+  import User from '../../domain/entities/User'
+  import RegisterNewUser from '../../domain/use_cases/RegisterNewUser'
+  import UserAlreadyExists from '../../exceptions/UserAlreadyExists'
+
   import Button from '../basics/button.svelte'
   import Input from '../basics/input.svelte'
-  import Link from '../basics/link.svelte'
+  import Modal from '../basics/modal.svelte'
 
-  let getEmailValue = () => {}
-  let getPasswordValue = () => {}
-  let getRepeatedPasswordValue = () => {}
+  let name = ''
+  let email = ''
+  let password = ''
+  let rpassword = ''
 
-  let register = () => {
-    page('/pomodoro')
+  let openModal1 = false
+  let openModal2 = false
+
+  async function register() {
+    if (password !== rpassword) {
+      // DIFERENT PASSWORDS
+      openModal1 = true
+      return
+    }
+    
+    const user = new User(name, email, password)
+    if (!user.isValid) {
+      // INVALID USER
+      openModal1 = true
+      return
+    }
+    
+    let registerNewUser = new RegisterNewUser()
+
+    try {
+      await registerNewUser.execute(user)
+      page('/pomodoro')
+    } catch (e) {
+      if (e instanceof UserAlreadyExists) {
+        openModal1 = true
+      } else {
+        openModal2 = true
+      }
+    }
   }
 </script>
 
@@ -62,13 +94,22 @@
   }
 </style>
 
+{#if openModal1}
+  <Modal title={'Invalid form data!'} text={'use a valid email and verify if the password is the same to both fields'} closeModal={() => openModal1 = false}></Modal>
+{/if}
+
+{#if openModal2}
+  <Modal title={'Sorry!'} text={'an user with this email already exists'} closeModal={() => openModal2 = false}></Modal>
+{/if}
+
 <div id="register-new-user-page">
   <section id="register">
     <form action="" method="post">
       <article>
-        <Input label="Email" getValue={getEmailValue}></Input>
-        <Input label="Password" getValue={getPasswordValue}></Input>
-        <Input label="Repeat password" getValue={getRepeatedPasswordValue}></Input>
+        <Input label="Name" on:change={(e) => name = e.target.value}></Input>
+        <Input label="Email" on:change={(e) => email = e.target.value}></Input>
+        <Input label="Password" on:change={(e) => password = e.target.value}></Input>
+        <Input label="Repeat password" on:change={(e) => rpassword = e.target.value}></Input>
       <label id="accept-terms-checkbox" class="matter-checkbox">
         <input type="checkbox">
         <span>I accept all the <a class="matter-link" href="terms.txt" style="font-size: large;">terms</a></span>
