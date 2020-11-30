@@ -1,3 +1,7 @@
+import EmailNotFound from '../../exceptions/EmailNotFound'
+import WrongPassword from '../../exceptions/WrongPassword'
+import UserNotFound from '../../exceptions/UserNotFound'
+import InvalidToken from '../../exceptions/InvalidToken'
 import UserAlreadyExists from '../../exceptions/UserAlreadyExists'
 
 class UserDataSource {
@@ -5,7 +9,7 @@ class UserDataSource {
     return true
   }
 
-  login(email, password) {
+  async login(email, password) {
     try {
       if (!email) throw new EmailNotFound()
       if (!password) throw new WrongPassword()
@@ -14,13 +18,15 @@ class UserDataSource {
         'http://localhost:3818/login', 
         { 
           method: 'POST',
-          headers: new Headers(),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
           mode: 'cors',
-          cache: 'default',
-          body: {
+          body: JSON.stringify({
             'email': email,
             'password': password
-          }
+          })
         })
 
       const resBody = await res.json()
@@ -36,18 +42,20 @@ class UserDataSource {
     }
   }
 
-  logout(token) {
+  async logout(token) {
     try {
       const res = await fetch(
         'http://localhost:3818/logout',
         { 
           method: 'POST',
-          headers: new Headers(),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
           mode: 'cors',
-          cache: 'default',
-          body: {
+          body: JSON.stringify({
             'token': token
-          }
+          })
         })
 
       const resBody = await res.json()
@@ -66,20 +74,22 @@ class UserDataSource {
     }
   }
 
-  createUser(user) {
+  async createUser(user) {
     try {
       const res = await fetch(
         'http://localhost:3818/register',
         { 
           method: 'POST',
-          headers: new Headers(),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
           mode: 'cors',
-          cache: 'default',
-          body: {
-            'name': user.name,
-            'email': user.email,
-            'password': user.password
-          }
+          body: JSON.stringify({
+            'name': user.name.name,
+            'email': user.email.email,
+            'password': user.password.password
+          })
         })
 
       const resBody = await res.json()

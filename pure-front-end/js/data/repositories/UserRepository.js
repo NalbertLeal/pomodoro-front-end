@@ -8,7 +8,7 @@ class UserRepository {
 
   async login(email, password) {
     try {
-      const res = await this.userDataSource.getUser(email, password)
+      const res = await this.userDataSource.login(email, password)
 
       localStorage.setItem('token', res.token)
 
@@ -24,7 +24,7 @@ class UserRepository {
 
   async createUser(user) {
     try {
-      const res = await this.userDataSource.getUser(user)
+      const res = await this.userDataSource.createUser(user)
 
       localStorage.setItem('token', res.token)
 
@@ -40,6 +40,7 @@ class UserRepository {
       await this.userDataSource.logout(token)
       localStorage.removeItem('token')
     } catch (e) {
+      localStorage.removeItem('token')
       throw e
     }
   } 

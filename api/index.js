@@ -8,7 +8,10 @@ const uuid = require('./uuid')
 const app = express()
 const port = 3818
 
-app.use(bodyParser())
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
 app.use(methodOverride())
 app.use(cors())
 
@@ -16,7 +19,7 @@ let db = {}
 let tokens = {}
 
 function isTokenValid(token, res) {
-  let ok = tokens[token] || false
+  let ok = token in tokens
   if (!ok) {
     res
     .status(400)
@@ -34,12 +37,14 @@ app.post('/login', (req, res) => {
     let password = req.body.password || ''
 
     let user = db[email]
-    if (!user || user.password != password) {
+    
+    if (!(email in db) || user.password != password) {
       res
         .status(404)
         .json({
           'error': 'user not found'
         })
+      return
     }
 
     let token = uuid()
@@ -93,6 +98,7 @@ app.post('/register', (req, res) => {
         .json({
           'error': 'user alread exists'
         })
+      return
     }
 
     db[email] = {
@@ -111,10 +117,10 @@ app.post('/register', (req, res) => {
       })
   } catch(e) {
     res
-    .status(400)
-    .json({
-      'error': e
-    })
+      .status(400)
+      .json({
+        'error': e
+      })
   }
 })
 

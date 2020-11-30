@@ -10,6 +10,7 @@ class User {
   }
 
   get isValid() {
+    // console.log(`${this.name.isValid} ${this.email.isValid} ${this.password.isValid}`)
     return this.name.isValid && 
       this.email.isValid && 
       this.password.isValid

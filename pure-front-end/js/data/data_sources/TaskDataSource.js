@@ -9,7 +9,10 @@ class TaskDataSource {
         'http://localhost:3818/task?&token=' + token, 
         { 
           method: 'GET',
-          headers: new Headers(),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
           mode: 'cors',
           cache: 'default'
         })
@@ -38,14 +41,16 @@ class TaskDataSource {
         'http://localhost:3818/task', 
         { 
           method: 'POST',
-          headers: new Headers(),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
           mode: 'cors',
-          cache: 'default',
-          body: {
+          body: JSON.stringify({
             'token': token,
             'title': task.title,
             'description': task.description
-          }
+          })
         })
   
       const resBody = await res.json()
@@ -70,9 +75,11 @@ class TaskDataSource {
         'http://localhost:3818/task?token=' + token + '&id=' + task.id, 
         { 
           method: 'DELETE',
-          headers: new Headers(),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
           mode: 'cors',
-          cache: 'default'
         })
   
       const resBody = await res.json()

@@ -5,7 +5,7 @@ class Logout {
     this.userRepository = new UserRepository()
   }
   
-  execute() {
+  async execute() {
     try {
       await this.userRepository.logout()
     } catch(e) {

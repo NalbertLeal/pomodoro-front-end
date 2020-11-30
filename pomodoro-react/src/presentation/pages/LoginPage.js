@@ -37,13 +37,11 @@ function LoginPage() {
 
   return <div id="login-page">
       <section id="login">
-        {/* <form action="" method="get"> */}
-          <article>
-            {emailInput}
-            {passwordInput}
-          </article>
-          {Button('Enter', () => login(email, password, setToPomodoroPage))}
-        {/* </form> */}
+        <article>
+          {emailInput}
+          {passwordInput}
+        </article>
+        {Button('Enter', () => login(email, password, setToPomodoroPage))}
         <p className="or">or</p>
         <p>
           <Link href="/register-new-user" label="register"></Link> now!!! it's free!!!

@@ -1,11 +1,13 @@
 import React from 'react'
 import { Redirect } from 'react-router';
 
-import './PomodoroPage.css'
-import isAuthenticated from '../../utils/isAuthenticated'
 import Input from '../basics/Input'
 import Button from '../basics/Button'
 import Timer from '../basics/Timer'
+
+import './PomodoroPage.css'
+import Logout from '../../domain/use_cases/Logout'
+import isAuthenticated from '../../utils/isAuthenticated'
 
 function ifNotAuthenticatedGoToLogin() {
   if (!isAuthenticated()) return true
@@ -25,10 +27,12 @@ class PomodoroPage extends React.Component {
       pomodoroCurrentStage: 0,
       shortRestDiv: '',
       longRestDiv: '',
-      workTimeDiv: 'pomodoro-stage-active'
+      workTimeDiv: 'pomodoro-stage-active',
+      isLogout: false
     }
 
     this.updateTaskText = this.updateTaskText.bind(this)
+    this.logout = this.logout.bind(this)
   }
 
   componentDidMount() {
@@ -128,9 +132,14 @@ class PomodoroPage extends React.Component {
     return false
   }
 
-  // ifNotAuthenticatedGoToLogin() {
-  //   if (!this.isAuthenticated()) return <Redirect to='/' />
-  // }
+  async logout() {
+    if (this.state.IsLogout) return
+    const logoutUseCase = new Logout()
+    await logoutUseCase.execute()
+    this.setState({
+      isLogout: true
+    })
+  }
 
   render() {
     if (ifNotAuthenticatedGoToLogin()) {
@@ -138,10 +147,8 @@ class PomodoroPage extends React.Component {
     }
     
     return <div id="pomodoro-page">
-      {/* {this.ifNotAuthenticatedGoToLogin()} */}
-
       <header>
-        <button id="logout-btn" class="matter-button-contained">Logout</button>
+        <button id="logout-btn" className="matter-button-contained" onClick={this.logout}>Logout</button>
       </header>
       <section id="pomodoro">
         <article id="time">

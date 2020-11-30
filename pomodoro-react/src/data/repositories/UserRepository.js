@@ -40,6 +40,7 @@ class UserRepository {
       await this.userDataSource.logout(token)
       localStorage.removeItem('token')
     } catch (e) {
+      localStorage.removeItem('token')
       throw e
     }
   } 
