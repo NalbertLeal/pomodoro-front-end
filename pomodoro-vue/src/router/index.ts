@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import HomeWrapper from '@/views/HomeWrapper.vue'
-import Pomodoro from '../views/Pomodoro.vue'
-import Login from '../views/Login.vue'
-import RegisterNewUser from '../views/RegisterNewUser.vue'
-import Error404 from '../views/Error404.vue'
+import HomeWrapper from '@/presentation/views/HomeWrapper.vue'
+import Pomodoro from '@/presentation/views/Pomodoro.vue'
+import Login from '@/presentation/views/Login.vue'
+import RegisterNewUser from '@/presentation/views/RegisterNewUser.vue'
+import Error404 from '@/presentation/views/Error404.vue'
 
 Vue.use(VueRouter)
 

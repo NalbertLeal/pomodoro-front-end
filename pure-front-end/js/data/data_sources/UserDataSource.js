@@ -52,7 +52,12 @@ class UserDataSource {
 
       const resBody = await res.json()
       if (resBody.error) {
-        throw new UserNotFound()
+        switch (resBody.error) {
+          case 'invalid token':
+            throw new InvalidToken()
+          default:
+            throw new UserNotFound()
+        }
       }
 
       return true

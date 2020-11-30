@@ -1,5 +1,6 @@
 import UserNotFound from '../../exceptions/UserNotFound'
 import NoTasksFound from '../../exceptions/NoTasksFound'
+import InvalidToken from '../../exceptions/InvalidToken'
 
 class TaskDataSource {
   async getAllUserTasks(token) {
@@ -18,6 +19,8 @@ class TaskDataSource {
         switch(resBody.error) {
           case 'user not found':
             throw new UserNotFound()
+          case 'invalid token':
+            throw new InvalidToken()
           default:
             throw new NoTasksFound()
         }
@@ -47,7 +50,12 @@ class TaskDataSource {
   
       const resBody = await res.json()
       if (resBody.error) {
-        throw new UserNotFound()
+        switch (resBody.error) {
+          case 'invalid token':
+            throw new InvalidToken()
+          default:
+            throw new UserNotFound()
+        }
       }
   
       return resBody.id
@@ -69,7 +77,12 @@ class TaskDataSource {
   
       const resBody = await res.json()
       if (resBody.error) {
-        throw new UserNotFound()
+        switch (resBody.error) {
+          case 'invalid token':
+            throw new InvalidToken()
+          default:
+            throw new UserNotFound()
+        }
       }
   
       return true
