@@ -8,29 +8,19 @@
 
 ## Descrição do projeto
 
-Neste projeto sera desenvolvida uma aplicação pomodoro fazendo uso de quatro frameworks front-end. Os frameworks são angular, react, svelte e vuejs (ou seja, uma versão do pomodoro em cada framework). Irei refazer o código seguindo padrões de projeto e recriando versões em angular, react, vuejs. Será uma boas experiência.
+Neste projeto sera desenvolvida uma aplicação pomodoro fazendo uso de quatro frameworks front-end. Os frameworks são angular, react, svelte e vuejs (ou seja, uma versão do pomodoro em cada framework). Para mais informações [clique aqui](http://dimap.ufrn.br/~andre/mat/courses/fwjs/).
 
-## O que foi feito na primeira parte?
+## O que foi feito?
 
-Na primeira parte do projeto foi desenvolvidos os componentes basicoas das aplicações vueJS, reactJS e svelte. Além dos componentes foram desenvolvidas as páginas de cadastro de usuário, recupareção de senha, login e do pomodoro (temporizador com lista de tarefas). A lista de tarefas da página do pomodoro ainda está sendo feita, por isso ainda não mostra as tarefas criadas. Os 3 projetos citados possuem uma store configurada, assim temos vueJS possue o vuex, o react o redux e o svelte o store (no caso apenas o vuex está 100% funcional).
+Na segunda unidade do projeto ouve uma completa reescrita do projeto. Tomei essa decisão pois o numero de componentes estavam crescendo e a interface que eu desejava montar mostrava que mais componentes teriam de ser criandos, isso para ser mantidos em 4 projetos diferentes se mostrou muito custoso. Sendo assim obtive na internet uma biblioteca css cklamada Matier CSS que permite o uso de alguns componentes do matereal design usando apenas css e html. Com isso pude montar as páginas de forma simples usando html e css puro, o resultado pode ser visto em "./pure-font-end/html/".
 
-Os componentes criados foram:
+Cada uma das páginas foram passadas para os foamatos de templates dos frameworks e quebrados em componentes menores e reutilizaveis (Button, Input, Link e Modal) além das views (as páginas/rotas login, registro de usuários e pomodoro). Para manter a lógica dos frameworks o mais simples posível foi criado dentro da pasta "./pure-font-end/js/" 3 pastas, **domain**, **data** e **exceptions**. Elas seguem (tentam seguir) a arquitetura **clean-arquitecture** proposta por Uncle Bob em seu livro lançado em 2017. O código javascript dessas pastas é reutilizado em todos os frameworks, isso poupou tempo e melhorou a o entendimento do fluxo dos dados dentro da aplicação no front.
 
-  - Timer: O componente responsável por medir e mostrar um cronometro para o usuario no topo da tela
-  - Input: O input de text da aplicação que recebe os parametros de tipo (text, password, email, etc), label e onChange (função chamada quando o text do input muda)
-  - Button: O botão da aplicação que recebe os parametros de label e onClick (função chamada quando botão é clicado)
-  - Figure: UExibe uma imagem seguindo o padrão HTML5 com a tag <img> dentro de uma tag <figure> e com um <figcaption>
+Para dar suporte ao front foi criada uma API javascript/nodejs usando o framework expressJS. essa API usa apenas cache para guardar os dados, sendo assim ao ser desligada perde todos esses dados. Ela foi desenvolvida apenas para dar um suporte simples a esse projeto, sendo assim toda a validação está nos front-ends e apenas o armazenamento de usuarios, tasks e tokens de autenticação fica como responsabilidade do back-end.
 
-As páginas criadas foram:
+Note que react, svelte e vue possuem validação dos dados nos formulários de login e registro de usuário, o angular ficou um pouco complicado, por conta do tempo estou entregando na 2ª unidade sem a validação de formulários no angular. Note que na clean-arquitecture é responsabilidade das classes entidades a validação dos dados. Eu quebrei ainda mais a responsabilidade da validação para aumentar o reuso de código, assim criei classes do tipo **ValueObject** são classes usadas nos campos de outra classe que precisam de validacão, por exemplo, tem uma classe Email que valida um Email, outra Password que valida uma senha e essas classes são usadas como os tipos dos campos email e password da classe User que por sua vez é válida se seus campos email e password (lembrand que esses campos são dos tipos Email e Password) forem válidos.
 
-  - Timer: O a tela de timer do pomodoro
-  - Cadastro de usuario: A tela de cadastro de usuário
-  - Recupereção de senha: A tela de recuperação de senha
-  - login (autenticação): a tela de autenticação do usuário cadastrado no sistema
-
-Foi feita uma api rest em expressJS que se encontra na pasta "api/" que está na raiz do projeto. Essa é uma simples API que será usada para ligar os fronts a um serviço que vai armazenar os usuários (os endpoints de usuário estão testados) e de armazenar as tasks dos usuários (ainda sendo feito).
-
-Infelizmente a implementação angular está atrasada por ser diferente das demais e demandar um pouco mais de esforço para entender.
+A lógica explicada acima facilitou muito a parte de validação de um dado de entrada na aplicação. Existem classes Repository e dataSource que respectivamente é uma abstração ao dado e a outra dá acesso a fonte do dado (a API), essas classes estão dentro da pasta data. A pasta expceptions por sua vez armazena todas as excessões lançadas pela aplicação (o front).
 
 ## Contribuidores e avaliadores
 
@@ -39,4 +29,6 @@ Avaliador: Dr. André Mauricio
 
 # Referencias:
 
-imagem usada na logo: [logo](https://www.pngwing.com/pt/free-png-xqail)
+livro de arquitetura limpa: [link](https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164)
+arquitetura limpa vs DDD: [link](https://khalilstemmler.com/articles/software-design-architecture/domain-driven-design-vs-clean-architecture/)
+explicação de value objects no DDD: [link](https://khalilstemmler.com/articles/typescript-value-object/)
