@@ -1,8 +1,22 @@
+/* eslint-disable */
 <template>
   <div id="register-use-page">
+    <Modal 
+      v-if="getIsModal1Open"
+      title="Invalid form data!"
+      text="use a valid email and verify if the password is the same to both fields"
+      :closeModal="openModal1"
+    />
+    <Modal 
+      v-if="getIsModal2Open"
+      title="Sorry!"
+      text="an user with this email already exists"
+      :closeModal="openModal2"
+    />
     <section id="register">
-      <form action="">
+      <!-- <form action=""> -->
         <article>
+          <Input label="Name" @value="formNameValue"/>
           <Input label="Email" @value="formEmailValue"/>
           <Input label="Password" @value="formPasswordValue"/>
           <Input label="Repeat password" @value="formRepeatPasswordValue"/>
@@ -12,7 +26,7 @@
           <span>I accept all the <Link href="terms.txt" label="terms" /> </span>
         </label>
         <Button label="Register" :onClick="register"></Button>
-      </form>
+      <!-- </form> -->
     </section>
   </div>
 </template>
@@ -25,33 +39,83 @@
   import Button from '../components/Button.vue'
   import Link from '../components/Link.vue'
   import Input from '../components/Input.vue'
+  import Modal from '../components/Modal.vue'
+
+  import User from '../../domain/entities/User'
+  import RegisterNewUser from '../../domain/use_cases/RegisterNewUser'
+  import UserAlreadyExists from '../../exceptions/UserAlreadyExists'
 
   @Component({
     components: {
       Button,
       Link,
-      Input
+      Input,
+      Modal
     }
   })
   export default class Login extends Vue {
-    email: String = ''
-    password: String = ''
-    repeatedPassword: String = ''
+    name: string = ''
+    email: string = ''
+    password: string = ''
+    repeatedPassword: string = ''
+    isModal1Open: boolean = false
+    isModal2Open: boolean = false
 
-    formEmailValue(email: any) {
+    get getIsModal1Open() {
+      return this.isModal1Open
+    }
+
+    get getIsModal2Open() {
+      return this.isModal2Open
+    }
+
+    formNameValue(name: string) {
+      this.name = name
+    }
+
+    formEmailValue(email: string) {
       this.email = email
     }
 
-    formPasswordValue(password: any) {
+    formPasswordValue(password: string) {
       this.password = password
     }
 
-    formRepeatPasswordValue(repeatedPassword: any) {
+    formRepeatPasswordValue(repeatedPassword: string) {
       this.repeatedPassword = repeatedPassword
     }
 
-    register() {
-      this.$router.push('/pomodoro')
+    openModal1() {
+      this.isModal1Open = !this.isModal1Open
+    }
+    
+    openModal2() {
+      this.isModal2Open = !this.isModal2Open
+    }
+
+    async register() {
+      if (this.password !== this.repeatedPassword) {
+        this.openModal1()
+        return
+      }
+
+      const user = new User(this.name, this.email, this.password)
+      if (!user.isValid) {
+        this.openModal1()
+        return
+      }
+
+      let registerNewUser = new RegisterNewUser()
+      try {
+        await registerNewUser.execute(user)
+        this.$router.push('/pomodoro')
+      } catch (e) {
+        if (e instanceof UserAlreadyExists) {
+          this.openModal1()
+        } else {
+          this.openModal2()
+        }
+      }
     }
   }
 </script>

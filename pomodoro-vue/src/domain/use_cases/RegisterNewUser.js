@@ -6,11 +6,7 @@ class RegisterNewUser {
   }
 
   async execute(user) {
-    try {
-      await this.userRepository.createUser(user)
-    } catch (e) {
-      throw e
-    }
+    await this.userRepository.createUser(user)
   }
 }
 

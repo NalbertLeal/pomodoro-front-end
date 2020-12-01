@@ -1,7 +1,7 @@
 <template>
   <div id="pomodoro-page">
     <header>
-      <button id="logout-btn" class="matter-button-contained">Logout</button>
+      <button id="logout-btn" class="matter-button-contained" v-on:click="logout">Logout</button>
     </header>
     <section id="pomodoro">
       <article id="time">
@@ -41,6 +41,8 @@
   import Vue from 'vue';
   import Component from 'vue-class-component';
 
+  import Logout from '../../domain/use_cases/Logout'
+
   const Base = Vue.extend({
     data() {
       return {
@@ -68,6 +70,12 @@
 
     get secondsTime() {
       return this.seconds < 10 ? `0${this.seconds}` : this.seconds
+    }
+
+    async logout() {
+      const logout = new Logout()
+      await logout.execute()
+      this.$router.push('/')
     }
   }
 </script>

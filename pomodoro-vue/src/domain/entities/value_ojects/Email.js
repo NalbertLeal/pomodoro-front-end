@@ -1,3 +1,4 @@
+/* eslint-disable */
 class Email {
   constructor(email) {
     if (typeof(email) !== 'string') {

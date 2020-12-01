@@ -7,31 +7,23 @@ class UserRepository {
   }
 
   async login(email, password) {
-    try {
-      const res = await this.userDataSource.login(email, password)
+    const res = await this.userDataSource.login(email, password)
 
-      localStorage.setItem('token', res.token)
+    localStorage.setItem('token', res.token)
 
-      return new User(
-        res.name, 
-        email, 
-        password
-      )
-    } catch (e) {
-      throw e
-    }
+    return new User(
+      res.name, 
+      email, 
+      password
+    )
   }
 
   async createUser(user) {
-    try {
-      const res = await this.userDataSource.createUser(user)
+    const res = await this.userDataSource.createUser(user)
 
-      localStorage.setItem('token', res.token)
+    localStorage.setItem('token', res.token)
 
-      return true
-    } catch (e) {
-      throw e
-    }
+    return true
   }
 
   async logout() {
@@ -41,7 +33,6 @@ class UserRepository {
       localStorage.removeItem('token')
     } catch (e) {
       localStorage.removeItem('token')
-      throw e
     }
   } 
 }

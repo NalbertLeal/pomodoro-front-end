@@ -6,11 +6,7 @@ class Logout {
   }
   
   async execute() {
-    try {
-      await this.userRepository.logout()
-    } catch(e) {
-      throw e
-    }
+    await this.userRepository.logout()
   }
 }
 
