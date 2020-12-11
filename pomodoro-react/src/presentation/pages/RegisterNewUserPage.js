@@ -16,7 +16,7 @@ import UserAlreadyExists from '../../exceptions/UserAlreadyExists'
 async function register(name, email, password, rpassword, setToPomodoroPage, setOpenModal1, setOpenModal2) {
   if (password !== rpassword) {
     // ERROR SENHAS: NÃO SÂO IGUAIS
-    setOpenModal1(true, 'Senhas diferentes.')
+    setOpenModal1(true)
   }
 
   const user = new User(name, email, password)

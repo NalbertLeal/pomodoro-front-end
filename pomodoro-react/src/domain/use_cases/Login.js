@@ -6,11 +6,7 @@ class Login {
   }
   
   async execute(email, password) {
-    try {
-      return await this.userRepository.login(email, password)
-    } catch(e) {
-      throw e
-    }
+    await this.userRepository.login(email, password)
   }
 }
 
