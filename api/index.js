@@ -50,6 +50,7 @@ app.post('/login', (req, res) => {
     let token = uuid()
     tokens[token] = email
 
+    console.log('200')
     res
       .status(200)
       .json({
@@ -104,7 +105,8 @@ app.post('/register', (req, res) => {
     db[email] = {
       'name': name,
       'email': email,
-      'password': password
+      'password': password,
+      'tasks': []
     }
 
     let token = uuid()
@@ -157,14 +159,12 @@ app.post('/task', (req, res) => {
     }
 
     let email = tokens[token]
-    let taskTitle = req.body.title
     let taskDescription = req.body.description
 
     const id = uuid()
     db[email]['tasks']
       .push({
         'id': id,
-        'title': taskTitle,
         'description': taskDescription
       })
 
@@ -190,8 +190,8 @@ app.delete('/task', (req, res) => {
       return
     }
 
-    let taskId = parseInt(req.query.id) || -1
-    
+    let taskId = req.query.id || -1
+
     let email = tokens[token]
     db[email]['tasks'] = db[email]['tasks'].filter(e => {
       if (e.id != taskId) {
@@ -202,7 +202,7 @@ app.delete('/task', (req, res) => {
     res.status(200)
   } catch(e) {
     res
-    .status(400)
+    .status(500)
     .json({
       'error': e
     })

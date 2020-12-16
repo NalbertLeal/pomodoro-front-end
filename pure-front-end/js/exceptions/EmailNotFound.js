@@ -1,1 +1,0 @@
-class EmailNotFound extends Error {}
